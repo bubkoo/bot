@@ -1,6 +1,6 @@
 # x6-bot
 
-> A GitHub App built with [Probot](https://github.com/probot/probot) that A Probot app
+> A GitHub App built with [Probot](https://github.com/probot/probot) that robot for x6
 
 ## Setup
 
@@ -8,8 +8,11 @@
 # Install dependencies
 npm install
 
-# Run the bot
-npm start
+# Compile
+npm run build
+
+# Run
+npm run start
 ```
 
 ## Contributing
