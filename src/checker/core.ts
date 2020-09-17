@@ -8,8 +8,13 @@ export namespace Core {
     }
 
     const templates = await getIssueTemplates(context)
+    console.log(body)
+    console.log(templates)
+    console.log(`-------------`)
     for (const template of templates) {
-      if (body.includes(template)) {
+      // console.log(template)
+      // console.log(`-------------`)
+      if (body === template || body.includes(template)) {
         return false
       }
     }

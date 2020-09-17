@@ -38,17 +38,9 @@ export async function getDirSubPaths(
   path: string,
 ): Promise<string[] | null> {
   try {
-    const res = await context.github.repos.getContent(
-      context.repo({
-        path,
-        owner: context.payload.repository.owner.login,
-        repo: context.payload.repository.name,
-      }),
-    )
-    context.log('getDirSubPaths: ', res.data)
+    const res = await context.github.repos.getContent(context.repo({ path }))
     return (res.data as any).map((f: any) => f.path)
   } catch (err) {
-    context.log(err)
     return null
   }
 }
@@ -59,14 +51,11 @@ export async function getIssueTemplates(context: Context) {
     '.github/ISSUE_TEMPLATE.md',
   )
 
-  context.log('defaultTemplate:', defaultTemplate)
-
   if (defaultTemplate != null) {
     return [defaultTemplate]
   }
 
-  const paths = await getDirSubPaths(context, '.github/ISSUE_TEMPLATE/')
-  context.log('issue template paths:', paths)
+  const paths = await getDirSubPaths(context, '.github/ISSUE_TEMPLATE')
   if (paths !== null) {
     const templates = []
     for (const path of paths) {
@@ -75,8 +64,6 @@ export async function getIssueTemplates(context: Context) {
         templates.push(template)
       }
     }
-
-    console.log('issue templates: ', templates)
 
     return templates
   }
