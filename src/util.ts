@@ -33,7 +33,10 @@ export async function getFileContent(context: Context, path: string) {
   }
 }
 
-export async function getDirSubPaths(context: Context, path: string) {
+export async function getDirSubPaths(
+  context: Context,
+  path: string,
+): Promise<string[] | null> {
   try {
     const res = await context.github.repos.getContent(context.repo({ path }))
     return (res.data as any).map((f: any) => f.path)
@@ -48,11 +51,14 @@ export async function getIssueTemplates(context: Context) {
     '.github/ISSUE_TEMPLATE.md',
   )
 
-  if (defaultTemplate !== null) {
+  context.log('defaultTemplate:', defaultTemplate)
+
+  if (defaultTemplate != null) {
     return [defaultTemplate]
   }
 
   const paths = await getDirSubPaths(context, '.github/ISSUE_TEMPLATE/')
+  context.log('issue template paths:', paths)
   if (paths !== null) {
     const templates = []
     for (const path of paths) {
@@ -61,6 +67,8 @@ export async function getIssueTemplates(context: Context) {
         templates.push(template)
       }
     }
+
+    console.log('issue templates: ', templates)
 
     return templates
   }
