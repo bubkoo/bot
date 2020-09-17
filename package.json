@@ -15,7 +15,7 @@
     "clean": "rimraf lib",
     "lint": "tslint -c tslint.json -p tsconfig.json --fix",
     "build": "tsc",
-    "start": "node ./lib/index.js",
+    "start": "probot run ./lib/app.js",
     "test": "jest",
     "prebuild": "run-s lint clean",
     "precommit": "lint-staged"
