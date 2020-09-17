@@ -2,7 +2,7 @@
   "name": "x6-bot",
   "version": "1.0.0",
   "private": true,
-  "description": "robot for x6",
+  "description": "A github app for x6",
   "main": "./lib/index.js",
   "repository": "https://github.com/bubkoo/x6-bot.git",
   "homepage": "https://github.com/bubkoo/x6-bot",

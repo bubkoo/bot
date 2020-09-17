@@ -11,6 +11,24 @@ export = (app: Application) => {
     await context.github.issues.createComment(issueComment)
   })
 
+  app.on('issue_comment.created', async (context) => {
+    if (!context.isBot) {
+      const payload = context.payload
+      const comment = payload.comment
+
+      // await context.github.issues.deleteComment(
+      //   context.issue({ comment_id: comment.id })
+      // );
+
+      await context.github.issues.updateComment(
+        context.issue({
+          comment_id: comment.id,
+          body: 'Welcome!!',
+        }),
+      )
+    }
+  })
+
   Checker.start(app)
   Welcome.start(app)
   AutoAssign.start(app)
