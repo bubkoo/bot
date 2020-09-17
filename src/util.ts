@@ -38,7 +38,13 @@ export async function getDirSubPaths(
   path: string,
 ): Promise<string[] | null> {
   try {
-    const res = await context.github.repos.getContent(context.repo({ path }))
+    const res = await context.github.repos.getContent(
+      context.repo({
+        path,
+        owner: context.payload.repository.owner.login,
+        repo: context.payload.repository.name,
+      }),
+    )
     context.log('getDirSubPaths: ', res.data)
     return (res.data as any).map((f: any) => f.path)
   } catch (err) {
