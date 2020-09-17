@@ -101,6 +101,8 @@ export namespace Checker {
             }
           }
         }
+
+        context.log(config, title, body, `${badTitle}`, `${badBody}`)
       } catch (err) {
         if (err.code !== 404) {
           throw err
