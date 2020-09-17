@@ -1,4 +1,4 @@
-import { sampleSize } from 'lodash-es'
+import { sampleSize } from 'lodash'
 import { Config } from './config'
 
 export function hasSkipKeywords(

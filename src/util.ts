@@ -1,5 +1,5 @@
 import { Context } from 'probot'
-import { random } from 'lodash-es'
+import { random } from 'lodash'
 
 export async function getConfig<T>(
   context: Context,
