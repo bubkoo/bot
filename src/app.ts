@@ -13,16 +13,12 @@ export = (app: Application) => {
 
   app.on('issue_comment.created', async (context) => {
     if (!context.isBot) {
-      const payload = context.payload
-      const comment = payload.comment
-
       // await context.github.issues.deleteComment(
       //   context.issue({ comment_id: comment.id })
       // );
 
-      await context.github.issues.updateComment(
+      await context.github.issues.createComment(
         context.issue({
-          comment_id: comment.id,
           body: 'Welcome!!',
         }),
       )
