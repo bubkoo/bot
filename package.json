@@ -3,8 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "description": "robot for x6",
-  "author": "bubkoo <bubkoo.wy@gmail.com>",
-  "license": "MIT",
+  "main": "./lib/index.js",
   "repository": "https://github.com/bubkoo/x6-bot.git",
   "homepage": "https://github.com/bubkoo/x6-bot",
   "bugs": "https://github.com/bubkoo/x6-bot/issues",
@@ -16,11 +15,13 @@
     "clean": "rimraf lib",
     "lint": "tslint -c tslint.json -p tsconfig.json --fix",
     "build": "tsc",
-    "start": "yarn build && echo 123",
+    "start": "node ./lib/index.js",
     "test": "jest",
     "prebuild": "run-s lint clean",
     "precommit": "lint-staged"
   },
+  "author": "bubkoo <bubkoo.wy@gmail.com>",
+  "license": "MIT",
   "dependencies": {
     "lodash": "^4.17.20",
     "probot": "^10.2.0"
