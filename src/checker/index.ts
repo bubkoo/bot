@@ -57,8 +57,6 @@ export namespace Checker {
 
           badBody = !body || !body.trim()
 
-          context.log('body: ', body)
-
           if (!badBody) {
             if (eventType === 'pullRequest') {
               if (
@@ -103,8 +101,6 @@ export namespace Checker {
             }
           }
         }
-
-        context.log(`${badTitle}`, `${badBody}`)
       } catch (err) {
         if (err.code !== 404) {
           throw err

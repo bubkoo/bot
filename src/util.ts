@@ -4,18 +4,21 @@ import { random } from 'lodash'
 export async function getConfig<T>(
   context: Context,
   defaults: T,
-  filePath: string = 'config.yml',
+  filePath: string = 'x6bot-config.yml',
 ) {
   return context.config(filePath, defaults).then((result) => result || defaults)
 }
 
-export function pickComment(comment: string | string[]) {
+export function pickComment(comment: string | string[], user?: string) {
+  let result: string
   if (typeof comment === 'string' || comment instanceof String) {
-    return comment.toString()
+    result = comment.toString()
+  } else {
+    const pos = random(0, comment.length, false)
+    result = comment[pos] || comment[0]
   }
 
-  const pos = random(0, comment.length, false)
-  return comment[pos] || comment[0]
+  return user ? result.replace(/{{\s*author\s*}}/g, user) : result
 }
 
 export async function getFileContent(context: Context, path: string) {
@@ -73,4 +76,69 @@ export async function getIssueTemplates(context: Context) {
 
 export async function getPullRequestTemplate(context: Context) {
   return getFileContent(context, '.github/PULL_REQUEST_TEMPLATE.md')
+}
+
+export async function lockIssue(
+  context: Context,
+  lockReason?: string,
+): Promise<any> {
+  const params = lockReason
+    ? context.issue({
+        lock_reason: lockReason,
+        headers: {
+          Accept: 'application/vnd.github.sailor-v-preview+json',
+        },
+      })
+    : context.issue()
+  return context.github.issues.lock(params)
+}
+
+export async function ensureUnlock(
+  context: Context,
+  callback: (() => void) | (() => Promise<any>),
+) {
+  const { payload, github } = context
+  const targetPayload = payload.issue || payload.pull_request
+  if (targetPayload.locked) {
+    const lockReason = targetPayload.active_lock_reason
+    await github.issues.unlock(context.issue())
+    await callback()
+    await lockIssue(context, lockReason)
+  } else {
+    await callback()
+  }
+}
+
+export namespace Util {
+  export function isIssue(context: Context) {
+    return context.payload.issue != null
+  }
+
+  export function isPullRequest(context: Context) {
+    return context.payload.pull_request != null
+  }
+
+  // export async function open(context: Context) {
+  //   return isIssue(context)
+  //     ? openIssue(context)
+  //     : context.github.pulls.update(context.pullRequest({ state: 'open' }))
+  // }
+
+  // export async function openIssue(
+  //   context: Context,
+  // ): Promise<OctokitResponse<IssuesUpdateResponseData>> {
+  //   return context.github.issues.update(context.issue({ state: 'open' }))
+  // }
+
+  // export async function openPullRequest(
+  //   context: Context,
+  // ): Promise<OctokitResponse<PullsUpdateResponseData>> {
+  //   return context.github.pulls.update(context.pullRequest({ state: 'open' }))
+  // }
+
+  // export async function close(context: Context) {
+  //   return isIssue(context)
+  //     ? context.github.issues.update(context.issue({ state: 'closed' }))
+  //     : context.github.pulls.update(context.pullRequest({ state: 'closed' }))
+  // }
 }
