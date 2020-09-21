@@ -1,6 +1,6 @@
 # x6-bot
 
-> A GitHub App built with [Probot](https://github.com/probot/probot) that robot for x6
+> A GitHub App for [X6](https://github.com/antvis/x6).
 
 ## Setup
 
