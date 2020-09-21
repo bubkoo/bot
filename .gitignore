@@ -5,3 +5,4 @@ lib
 *.pem
 !mock-cert.pem
 .env
+.vscode
