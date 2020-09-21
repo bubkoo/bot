@@ -1,5 +1,5 @@
 import { Context } from 'probot'
-import { getConfig } from '../util'
+import { Util } from '../util'
 
 export namespace Config {
   export interface Definition {
@@ -17,7 +17,7 @@ export namespace Config {
   }
 
   export async function get(context: Context) {
-    return getConfig(context, defaults).then(
+    return Util.getConfig(context, defaults).then(
       (ret) => ret.welcome || defaults.welcome,
     )
   }

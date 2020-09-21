@@ -1,9 +1,9 @@
 import { Application } from 'probot'
-import { pickComment } from '../util'
+import { Util } from '../util'
 import { Config } from './config'
 import { Core } from './core'
 
-export namespace Checker {
+export namespace RequestInfo {
   export function start(app: Application) {
     app.on(['pull_request.opened', 'issues.opened'], async (context) => {
       let title: string
@@ -90,7 +90,7 @@ export namespace Checker {
             }
 
             context.github.issues.createComment(
-              context.issue({ body: pickComment(comment) }),
+              context.issue({ body: Util.pickComment(comment) }),
             )
 
             // Add label if there is one listed in the yaml file

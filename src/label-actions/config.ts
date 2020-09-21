@@ -1,5 +1,5 @@
 import { Context } from 'probot'
-import { getConfig } from '../util'
+import { Util } from '../util'
 
 export namespace Config {
   interface Actions {
@@ -18,6 +18,15 @@ export namespace Config {
     only?: 'issues' | 'pulls'
   }
 
+  const needsMoreInfoComment = `
+Hello \${ author }
+
+为了能够进行高效沟通，我们对 issue 有一定的格式要求，你的 issue 因为无复现步骤或可复现仓库而被自动关闭，提供之后会被 REOPEN。
+
+In order to communicate effectively, we have a certain format requirement for the issue, your issue is automatically closed because there is no recurring step or reproducible warehouse, and will be REOPEN after the offer.
+
+  `
+
   export const defaults: { labelActions: Definition } = {
     labelActions: {
       common: {
@@ -28,28 +37,33 @@ export namespace Config {
           lock: true,
           lockReason: 'too heated',
         },
-        '-heated': { unlock: true },
+        '-heated': {
+          unlock: true,
+        },
+        'needs-more-info': {
+          comment: needsMoreInfoComment.trim(),
+          close: true,
+        },
+        '-needs-more-info': {
+          open: true,
+        },
       },
       issues: {
         feature: {
           close: true,
           comment:
-            ':wave: @{{ author }}, please use our idea board to request new features.',
+            ':wave: ${ author }, please use our idea board to request new features.',
         },
         '-wontfix': {
           open: true,
         },
       },
-      pulls: {
-        pizzazz: {
-          comment: '![](https://i.imgur.com/WuduJNk.jpg)',
-        },
-      },
+      pulls: {},
     },
   }
 
   export async function get(context: Context) {
-    return getConfig(context, defaults).then(
+    return Util.getConfig(context, defaults).then(
       (ret) => ret.labelActions || defaults.labelActions,
     )
   }

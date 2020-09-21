@@ -1,6 +1,6 @@
 import { Application } from 'probot'
 import { Config } from './config'
-import { pickComment } from '../util'
+import { Util } from '../util'
 
 export namespace Core {
   export function firstIssue(app: Application) {
@@ -19,7 +19,7 @@ export namespace Core {
           const comment = config.firstIssueComment
           if (comment) {
             context.github.issues.createComment(
-              context.issue({ body: pickComment(comment) }),
+              context.issue({ body: Util.pickComment(comment) }),
             )
           }
         } catch (err) {
@@ -48,7 +48,7 @@ export namespace Core {
           const comment = config.firstPRComment
           if (comment) {
             context.github.issues.createComment(
-              context.issue({ body: pickComment(comment) }),
+              context.issue({ body: Util.pickComment(comment) }),
             )
           }
         } catch (error) {
@@ -79,7 +79,7 @@ export namespace Core {
             const comment = config.firstPRMergeComment
             if (comment) {
               context.github.issues.createComment(
-                context.issue({ body: pickComment(comment) }),
+                context.issue({ body: Util.pickComment(comment) }),
               )
             }
           } catch (err) {

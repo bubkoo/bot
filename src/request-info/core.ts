@@ -1,5 +1,5 @@
 import { Context } from 'probot'
-import { getIssueTemplates, getPullRequestTemplate } from '../util'
+import { Util } from '../util'
 
 export namespace Core {
   export async function isIssueBodyValid(context: Context, body: string) {
@@ -7,7 +7,7 @@ export namespace Core {
       return false
     }
 
-    const templates = await getIssueTemplates(context)
+    const templates = await Util.getIssueTemplates(context)
     for (const template of templates) {
       const b = body.trim().replace(/[\r\n]/g, '')
       const t = template.trim().replace(/[\r\n]/g, '')
@@ -24,7 +24,7 @@ export namespace Core {
       return false
     }
 
-    const template = await getPullRequestTemplate(context)
+    const template = await Util.getPullRequestTemplate(context)
     if (template && body.includes(template)) {
       return false
     }

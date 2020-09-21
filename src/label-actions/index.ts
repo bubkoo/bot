@@ -1,5 +1,5 @@
 import { Application } from 'probot'
-import { pickComment, lockIssue, ensureUnlock } from '../util'
+import { Util } from '../util'
 import { Config } from './config'
 
 export namespace LabelActions {
@@ -16,7 +16,6 @@ export namespace LabelActions {
         const { payload, github } = context
         const only = config.only
         const type = payload.issue ? 'issues' : 'pulls'
-        console.log(type)
         if (only && only !== type) {
           return
         }
@@ -30,11 +29,11 @@ export namespace LabelActions {
         const { comment, open, close, lock, unlock, lockReason } = actions
         const targetPayload = payload.issue || payload.pull_request
 
-        console.log(actions)
-
         if (comment) {
-          const body = pickComment(comment, targetPayload.user.login)
-          await ensureUnlock(context, () =>
+          const body = Util.pickComment(comment, {
+            author: targetPayload.user.login,
+          })
+          await Util.ensureUnlock(context, () =>
             github.issues.createComment(context.issue({ body })),
           )
         }
@@ -48,7 +47,7 @@ export namespace LabelActions {
         }
 
         if (lock && !targetPayload.locked) {
-          await lockIssue(context, lockReason)
+          await Util.lockIssue(context, lockReason)
         }
 
         if (unlock && targetPayload.locked) {

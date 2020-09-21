@@ -1,5 +1,5 @@
 import { Context } from 'probot'
-import { getConfig } from '../util'
+import { Util } from '../util'
 
 export namespace Config {
   export interface Definition {
@@ -46,8 +46,8 @@ export namespace Config {
     defaultComment: string | string[]
   }
 
-  export const defaults: { checker: Definition } = {
-    checker: {
+  export const defaults: { requestInfo: Definition } = {
+    requestInfo: {
       on: {
         issue: true,
         pullRequest: true,
@@ -58,20 +58,24 @@ export namespace Config {
       badIssueTitles: ['update', 'updates', 'test', 'issue', 'debug', 'demo'],
       badPullRequestTitles: ['update', 'updates', 'test'],
       labelToAdd: 'needs-more-info',
-      badIssueTitleComment: '',
-      badPullRequestTitleComment: '',
-      badIssueBodyComment: '',
-      badPullRequestBodyComment: '',
+      badIssueTitleComment:
+        'We would appreciate it if you could provide us with more info about this issue!',
+      badPullRequestTitleComment:
+        'We would appreciate it if you could provide us with more info about this pr!',
+      badIssueBodyComment:
+        'We would appreciate it if you could provide us with more info about this issue!',
+      badPullRequestBodyComment:
+        'We would appreciate it if you could provide us with more info about this pr!',
       defaultComment:
-        'The maintainers of this repository would appreciate it if you could provide more information.',
+        'We would appreciate it if you could provide us with more info about this issue/pr!',
     },
   }
 }
 
 export namespace Config {
   export async function get(context: Context) {
-    return getConfig(context, defaults).then(
-      (ret) => ret.checker || defaults.checker,
+    return Util.getConfig(context, defaults).then(
+      (ret) => ret.requestInfo || defaults.requestInfo,
     )
   }
 }
