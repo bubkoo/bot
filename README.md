@@ -1,6 +1,6 @@
-# x6-bot
+# bubkoo-bot
 
-> A GitHub App for [X6](https://github.com/antvis/x6).
+> A GitHub App for me.
 
 ## Setup
 
@@ -14,13 +14,3 @@ npm run build
 # Run
 npm run start
 ```
-
-## Contributing
-
-If you have suggestions for how x6-bot could be improved, or want to report a bug, open an issue! We'd love all and any contributions.
-
-For more, check out the [Contributing Guide](CONTRIBUTING.md).
-
-## License
-
-[ISC](LICENSE) © 2020 bubkoo <bubkoo.wy@gmail.com>
