@@ -1,4 +1,5 @@
 import { Application } from 'probot'
+import { AppToken } from './app-token'
 import { PRTriage } from './pr-triage'
 // import { Welcome } from './welcome'
 // import { AutoAssign } from './auto-assign'
@@ -8,6 +9,7 @@ import { PRTriage } from './pr-triage'
 
 export = (app: Application) => {
   PRTriage.start(app)
+  AppToken.start(app)
 
   // Welcome.start(app)
   // AutoComment.start(app)
