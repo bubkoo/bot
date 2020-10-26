@@ -1,5 +1,6 @@
 import { Application, Context } from 'probot'
 import { App } from '@octokit/app'
+import moment from 'moment'
 import sodium from 'tweetsodium'
 import isBase64 from 'is-base64'
 
@@ -41,7 +42,10 @@ export namespace AppToken {
         'GET /repos/:owner/:repo/actions/secrets/:secret_name',
         context.repo({ secret_name: name }),
       )
-      return data.name === name
+      if (data.name === name) {
+        return moment().diff(data.updated_at, 'days') < 7
+      }
+      return false
     } catch (error) {
       return false
     }
