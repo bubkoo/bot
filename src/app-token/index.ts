@@ -3,6 +3,7 @@ import { App } from '@octokit/app'
 import moment from 'moment'
 import sodium from 'tweetsodium'
 import isBase64 from 'is-base64'
+import scheduler from 'probot-scheduler'
 
 export namespace AppToken {
   async function getInstallationAccessToken(installationId: number) {
@@ -36,7 +37,7 @@ export namespace AppToken {
     }
   }
 
-  async function hasSecret(context: Context, name: string) {
+  export async function hasSecret(context: Context, name: string) {
     try {
       const { data } = await context.github.request(
         'GET /repos/:owner/:repo/actions/secrets/:secret_name',
@@ -52,13 +53,9 @@ export namespace AppToken {
   }
 
   export function start(app: Application) {
-    app.on('*', async (context: Context) => {
+    scheduler(app)
+    app.on('schedule.repository' as any, async (context: Context) => {
       const secretName = 'BOT_TOKEN'
-      const exist = await hasSecret(context, secretName)
-      if (exist) {
-        return
-      }
-
       const {
         data: { id: installationId },
       } = await context.github.apps.getRepoInstallation(context.repo())
