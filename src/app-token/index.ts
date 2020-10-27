@@ -53,7 +53,7 @@ export namespace AppToken {
   }
 
   export function start(app: Application) {
-    scheduler(app)
+    scheduler(app, { delay: false, interval: 4 * 60 * 60 * 1000 })
     app.on('schedule.repository' as any, async (context: Context) => {
       const secretName = 'BOT_TOKEN'
       const {
