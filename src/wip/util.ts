@@ -1,4 +1,4 @@
-import { emojiToName } from 'gemoji'
+import emojiToName from 'gemoji/emoji-to-name.json'
 import { Location, PullRequestContext, State } from './types'
 import { getREADME, getManualDoc, getDefaultDoc } from './doc'
 
