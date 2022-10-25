@@ -1,24 +1,23 @@
-import { Context } from 'probot'
-import { Status } from './status'
+import { getStatus, updateStatus, hasChange } from './status'
+import { PullRequestContext } from './types'
 
-export namespace Core {
-  export async function start(context: Context) {
-    try {
-      const nextState = await Status.get(context)
-      context.log(`[wip] Next status: ${JSON.stringify(nextState)}`)
-      const hasChange = await Status.hasChange(context, nextState)
-      context.log(`[wip] Status changed: ${hasChange}`)
+export async function run(context: PullRequestContext) {
+  try {
+    const nextState = await getStatus(context)
+    context.log(`[wip] Next status: ${JSON.stringify(nextState)}`)
 
-      if (hasChange) {
-        await Status.update(context, nextState)
-        context.log(
-          nextState.wip ? '[wip] work in progress' : '[wip] ready for review',
-        )
-      } else {
-        context.log('[wip] status not changed')
-      }
-    } catch (error) {
-      context.log(`[wip] ${error.message}`)
+    const changed = await hasChange(context, nextState)
+    context.log(`[wip] Status changed: ${changed}`)
+
+    if (changed) {
+      await updateStatus(context, nextState)
+      context.log(
+        nextState.wip ? '[wip] work in progress' : '[wip] ready for review',
+      )
+    } else {
+      context.log('[wip] status not changed')
     }
+  } catch (error) {
+    context.log(`[wip] ${error.message}`)
   }
 }

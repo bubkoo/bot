@@ -1,7 +1,6 @@
 import { Section } from './types'
 
-export namespace Doc {
-  export const getDefaultConfiguration = () => `
+export const getDefaultDoc = () => `
 
 \`\`\`yml
 terms:
@@ -15,7 +14,7 @@ locations:
 
 `
 
-  export const getREADME = () => `
+export const getREADME = () => `
 
 By default, WIP is setting a pull request status to pending if it finds one of the following terms in the pull request title or label.
 
@@ -62,14 +61,13 @@ The above configuration looks first for \`⛔\` in the pull request title and as
 
 `
 
-  export function getManualConfiguration(configs: Section[]) {
-    const line = (c: Section) =>
-      `| ${c.terms.join(', ')} | ${c.locations.join(', ')} |`
+export function getManualDoc(configs: Section[]) {
+  const line = (c: Section) =>
+    `| ${c.terms.join(', ')} | ${c.locations.join(', ')} |`
 
-    return `
+  return `
 | terms  | locations |
 |--------|-----------|
 ${configs.map((config) => line(config)).join('\n')}
 `
-  }
 }

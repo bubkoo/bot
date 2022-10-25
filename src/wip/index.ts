@@ -1,21 +1,19 @@
-import { Application } from 'probot'
-import { Core } from './core'
+import { Probot } from 'probot'
+import { run } from './core'
 
-export namespace WIP {
-  export function start(app: Application) {
-    try {
-      app.on(
-        [
-          'pull_request.opened',
-          'pull_request.edited',
-          'pull_request.labeled',
-          'pull_request.unlabeled',
-          'pull_request.synchronize',
-        ],
-        Core.start,
-      )
-    } catch (error) {
-      app.log.error(error)
-    }
+export function wip(app: Probot) {
+  try {
+    app.on(
+      [
+        'pull_request.opened',
+        'pull_request.edited',
+        'pull_request.labeled',
+        'pull_request.unlabeled',
+        'pull_request.synchronize',
+      ],
+      (context) => run(context),
+    )
+  } catch (error) {
+    app.log.error(error)
   }
 }
