@@ -53,6 +53,9 @@
       "eslint --fix"
     ]
   },
+  "engines": {
+    "node": ">= 10.13.0"
+  },
   "repository": "https://github.com/bubkoo/bot.git",
   "homepage": "https://github.com/bubkoo/bot",
   "bugs": "https://github.com/bubkoo/bot/issues"
