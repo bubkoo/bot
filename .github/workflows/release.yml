@@ -20,8 +20,8 @@ jobs:
       - name: 📦　Build
         run: yarn build
 
-      - name: ✅　Test
-        run: yarn test
+      # - name: ✅　Test
+      #   run: yarn test
 
       - name: 🔑　Generate Token
         uses: bubkoo/use-app-token@v1
