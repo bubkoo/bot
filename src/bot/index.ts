@@ -1,12 +1,15 @@
 import { Probot } from 'probot'
-import { run } from './core'
-import { WorkflowRunContext } from './types'
+import * as util from './util'
 
 export function bot(app: Probot) {
   try {
-    app.on('workflow_run', async (context) =>
-      run(app, context as WorkflowRunContext),
-    )
+    app.on('workflow_run', async (context) => {
+      const action = context.payload.action
+      if (action !== 'completed') {
+        util.log(`workflow_run.${action}`)
+        await util.update(app, context)
+      }
+    })
   } catch (error) {
     app.log.error(error)
   }

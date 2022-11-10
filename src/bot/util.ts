@@ -1,7 +1,8 @@
+import { Probot } from 'probot'
 import sodium from 'libsodium-wrappers'
 import { WorkflowRunContext } from './types'
 
-async function createSecret(context: WorkflowRunContext, value: string) {
+async function encryptSecret(context: WorkflowRunContext, value: string) {
   const { data } = await context.octokit.request(
     'GET /repos/:owner/:repo/actions/secrets/public-key',
     context.repo(),
@@ -26,12 +27,12 @@ async function createSecret(context: WorkflowRunContext, value: string) {
   }
 }
 
-export async function createOrUpdateRepoSecret(
+async function createOrUpdateSecret(
   context: WorkflowRunContext,
   name: string,
   value: string,
 ) {
-  const secret = await createSecret(context, value)
+  const secret = await encryptSecret(context, value)
   await context.octokit.request(
     'PUT /repos/:owner/:repo/actions/secrets/:secret_name',
     context.repo({
@@ -41,11 +42,49 @@ export async function createOrUpdateRepoSecret(
   )
 }
 
-export async function deleteSecret(context: WorkflowRunContext, name: string) {
+async function deleteSecret(context: WorkflowRunContext, name: string) {
   await context.octokit.request(
     'DELETE /repos/:owner/:repo/actions/secrets/:secret_name',
     context.repo({
       secret_name: name,
     }),
   )
+}
+
+function getSecretName() {
+  return process.env.APP_TOKEN_NAME || 'APP_TOKEN'
+}
+
+export function log(message: string) {
+  const char = '='
+  const max = 64
+  const len = message.length
+  if (len < max - 2) {
+    const total = max - message.length - 2
+    const left = Math.floor(total / 2)
+    const right = total - left
+    // eslint-disable-next-line
+    console.log(`${''.padEnd(left, char)} ${message} ${''.padEnd(right, char)}`)
+  } else {
+    // eslint-disable-next-line
+    console.log(message)
+  }
+}
+
+export async function update(app: Probot, context: WorkflowRunContext) {
+  const client = await app.auth()
+  const {
+    data: { token },
+  } = await client.apps.createInstallationAccessToken({
+    installation_id: context.payload.installation!.id,
+  })
+
+  const tokenName = getSecretName()
+  await createOrUpdateSecret(context, tokenName, token)
+  log('APP TOKEN UPDATED')
+}
+
+export async function remove(context: WorkflowRunContext) {
+  const tokenName = getSecretName()
+  await deleteSecret(context, tokenName)
 }

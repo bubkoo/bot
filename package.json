@@ -9,7 +9,7 @@
     "build": "tsc",
     "dev": "nodemon --exec \"npm start\"",
     "start": "probot run ./lib/index.js",
-    "prebuild": "run-s lint clean",
+    "prebuild": "run-s clean",
     "prepare": "is-ci || husky install .husky"
   },
   "author": {
