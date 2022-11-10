@@ -1,16 +1,17 @@
 /* eslint-disable no-console */
 import { Probot } from 'probot'
 import { WorkflowRunContext } from './types'
-import { createOrUpdateRepoSecret } from './util'
+import { createOrUpdateRepoSecret, deleteSecret } from './util'
 
 export async function run(app: Probot, context: WorkflowRunContext) {
   const payload = context.payload
   const action = payload.action
 
-  console.log(`workflow_run.${action}`)
+  console.log(`==================== workflow ${action} ====================`)
 
-  if (action === 'requested') {
-    console.log('===================== workflow started =====================')
+  if (action === 'completed') {
+    await deleteSecret(context, 'app_token')
+  } else {
     const client = await app.auth()
     const {
       data: { token },
@@ -19,10 +20,5 @@ export async function run(app: Probot, context: WorkflowRunContext) {
     })
 
     await createOrUpdateRepoSecret(context, 'app_token', token)
-
-    console.log(token)
-    context.log.info(token)
-  } else if (action === 'completed') {
-    console.log('==================== workflow completed ====================')
   }
 }
