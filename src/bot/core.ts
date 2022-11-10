@@ -1,6 +1,6 @@
 import { Probot } from 'probot'
 import { WorkflowRunContext } from './types'
-import { createOrUpdateRepoSecret, deleteSecret } from './util'
+import { createOrUpdateRepoSecret } from './util'
 
 export async function run(app: Probot, context: WorkflowRunContext) {
   const payload = context.payload
@@ -11,7 +11,7 @@ export async function run(app: Probot, context: WorkflowRunContext) {
   console.log(`==================== workflow ${action} ====================`)
 
   if (action === 'completed') {
-    await deleteSecret(context, tokenName)
+    // await deleteSecret(context, tokenName)
   } else {
     const client = await app.auth()
     const {
