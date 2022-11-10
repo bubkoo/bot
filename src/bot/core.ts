@@ -8,7 +8,7 @@ export async function run(app: Probot, context: WorkflowRunContext) {
   const tokenName = process.env.APP_TOKEN_NAME || 'APP_TOKEN'
 
   // eslint-disable-next-line
-  console.log(`==================== workflow ${action} ====================`)
+  console.log(`=================== workflow_run ${action} ===================`)
 
   if (action === 'completed') {
     // await deleteSecret(context, tokenName)
@@ -20,6 +20,8 @@ export async function run(app: Probot, context: WorkflowRunContext) {
       installation_id: payload.installation!.id,
     })
 
+    // eslint-disable-next-line
+    console.log(`=================== TOKEN UPDATED ===================`)
     await createOrUpdateRepoSecret(context, tokenName, token)
   }
 }
