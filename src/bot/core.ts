@@ -3,23 +3,26 @@ import { Probot } from 'probot'
 import { WorkflowRunContext } from './types'
 import { createOrUpdateRepoSecret } from './util'
 
-export async function requested(app: Probot, context: WorkflowRunContext) {
-  console.log('workflow_run.requested')
-  context.log.info('workflow_run.requested')
-  const client = await app.auth()
-  const {
-    data: { token },
-  } = await client.apps.createInstallationAccessToken({
-    installation_id: context.payload.installation!.id,
-  })
+export async function run(app: Probot, context: WorkflowRunContext) {
+  const payload = context.payload
+  const action = payload.action
 
-  await createOrUpdateRepoSecret(context, 'app_token', token)
+  console.log(`workflow_run.${action}`)
 
-  console.log(token)
-  context.log.info(token)
-}
+  if (action === 'requested') {
+    console.log('===================== workflow started =====================')
+    const client = await app.auth()
+    const {
+      data: { token },
+    } = await client.apps.createInstallationAccessToken({
+      installation_id: payload.installation!.id,
+    })
 
-export async function completed(app: Probot, context: WorkflowRunContext) {
-  context.log.info('workflow_run.completed')
-  app.log.info(context.repo())
+    await createOrUpdateRepoSecret(context, 'app_token', token)
+
+    console.log(token)
+    context.log.info(token)
+  } else if (action === 'completed') {
+    console.log('==================== workflow completed ====================')
+  }
 }

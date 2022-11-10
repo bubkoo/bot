@@ -1,10 +1,9 @@
 import { Probot } from 'probot'
-import { requested, completed } from './core'
+import { run } from './core'
 
 export function bot(app: Probot) {
   try {
-    app.on('workflow_run.requested', async (context) => requested(app, context))
-    app.on('workflow_run.completed', async (context) => completed(app, context))
+    app.on('workflow_run', async (context) => run(app, context))
   } catch (error) {
     app.log.error(error)
   }
