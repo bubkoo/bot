@@ -4,7 +4,7 @@ import { wip } from './wip'
 
 export = (app: Probot) => {
   app.onAny(async (context: any) => {
-    app.log.info(`event: ${context.name}`)
+    context.log.info(`event: ${context.name}`)
   })
 
   bot(app)
