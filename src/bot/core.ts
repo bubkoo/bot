@@ -13,7 +13,7 @@ export async function requested(app: Probot, context: WorkflowRunContext) {
     installation_id: context.payload.installation!.id,
   })
 
-  await createOrUpdateRepoSecret(context, 'bot-token', token)
+  await createOrUpdateRepoSecret(context, 'bot_token', token)
 
   console.log(token)
   context.log.info(token)
