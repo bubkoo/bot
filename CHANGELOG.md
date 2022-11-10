@@ -1,3 +1,10 @@
+## [1.0.5](https://github.com/bubkoo/bot/compare/v1.0.4...v1.0.5) (2022-11-10)
+
+
+### Reverts
+
+* use console.log ([45b1064](https://github.com/bubkoo/bot/commit/45b10649657b484d76aed49e8d651e2bb986023b))
+
 ## [1.0.4](https://github.com/bubkoo/bot/compare/v1.0.3...v1.0.4) (2022-11-10)
 
 ## [1.0.3](https://github.com/bubkoo/bot/compare/v1.0.2...v1.0.3) (2022-11-10)
