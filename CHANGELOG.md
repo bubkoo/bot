@@ -1,3 +1,10 @@
+# [1.1.0](https://github.com/bubkoo/bot/compare/v1.0.9...v1.1.0) (2022-11-10)
+
+
+### Features
+
+* get token name from env ([a1daa63](https://github.com/bubkoo/bot/commit/a1daa6331fa4a28d6abf053a3063307d5c61579a))
+
 ## [1.0.9](https://github.com/bubkoo/bot/compare/v1.0.8...v1.0.9) (2022-11-10)
 
 ## [1.0.8](https://github.com/bubkoo/bot/compare/v1.0.7...v1.0.8) (2022-11-10)
