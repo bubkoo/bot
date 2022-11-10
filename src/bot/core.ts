@@ -3,7 +3,7 @@ import { WorkflowRunContext } from './types'
 import { createOrUpdateRepoSecret } from './util'
 
 export async function requested(app: Probot, context: WorkflowRunContext) {
-  app.log.info('workflow_run.requested')
+  context.log.info('workflow_run.requested')
   const client = await app.auth()
   const {
     data: { token },
@@ -13,10 +13,10 @@ export async function requested(app: Probot, context: WorkflowRunContext) {
 
   await createOrUpdateRepoSecret(context, 'bot-token', token)
 
-  app.log.info(token)
+  context.log.info(token)
 }
 
 export async function completed(app: Probot, context: WorkflowRunContext) {
-  app.log.info('workflow_run.completed')
+  context.log.info('workflow_run.completed')
   app.log.info(context.repo())
 }
