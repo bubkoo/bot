@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import { Probot } from 'probot'
 import { WorkflowRunContext } from './types'
 import { createOrUpdateRepoSecret, deleteSecret } from './util'
@@ -6,11 +5,13 @@ import { createOrUpdateRepoSecret, deleteSecret } from './util'
 export async function run(app: Probot, context: WorkflowRunContext) {
   const payload = context.payload
   const action = payload.action
+  const tokenName = process.env.APP_TOKEN_NAME || 'APP_TOKEN'
 
+  // eslint-disable-next-line
   console.log(`==================== workflow ${action} ====================`)
 
   if (action === 'completed') {
-    await deleteSecret(context, 'app_token')
+    await deleteSecret(context, tokenName)
   } else {
     const client = await app.auth()
     const {
@@ -19,6 +20,6 @@ export async function run(app: Probot, context: WorkflowRunContext) {
       installation_id: payload.installation!.id,
     })
 
-    await createOrUpdateRepoSecret(context, 'app_token', token)
+    await createOrUpdateRepoSecret(context, tokenName, token)
   }
 }
