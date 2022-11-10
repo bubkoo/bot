@@ -5,6 +5,7 @@ specifiers:
   '@bubkoo/eslint-config': ^1.2.0
   '@bubkoo/tsconfig': ^1.0.0
   '@types/js-yaml': ^4.0.3
+  '@types/libsodium-wrappers': ^0.7.10
   '@types/lodash': ^4.14.161
   '@types/node': ^18.11.5
   '@types/uuid': ^8.3.1
@@ -13,6 +14,7 @@ specifiers:
   husky: ^8.0.1
   is-ci: ^3.0.1
   js-yaml: ^4.1.0
+  libsodium-wrappers: ^0.7.10
   lodash: ^4.17.20
   nock: ^13.0.5
   nodemon: ^2.0.4
@@ -29,6 +31,7 @@ specifiers:
 dependencies:
   gemoji: 6.1.0
   js-yaml: 4.1.0
+  libsodium-wrappers: 0.7.10
   lodash: 4.17.21
   probot: 12.2.8
   uuid: 9.0.0
@@ -38,6 +41,7 @@ devDependencies:
   '@bubkoo/eslint-config': 1.2.0_pcit6nykmxit3vv6c7deq76n7y
   '@bubkoo/tsconfig': 1.0.0_typescript@4.8.4
   '@types/js-yaml': 4.0.5
+  '@types/libsodium-wrappers': 0.7.10
   '@types/lodash': 4.14.188
   '@types/node': 18.11.9
   '@types/uuid': 8.3.4
@@ -894,6 +898,10 @@ packages:
     dependencies:
       '@types/node': 18.11.9
     dev: false
+
+  /@types/libsodium-wrappers/0.7.10:
+    resolution: {integrity: sha512-BqI9B92u+cM3ccp8mpHf+HzJ8fBlRwdmyd6+fz3p99m3V6ifT5O3zmOMi612PGkpeFeG/G6loxUnzlDNhfjPSA==}
+    dev: true
 
   /@types/lodash/4.14.188:
     resolution: {integrity: sha512-zmEmF5OIM3rb7SbLCFYoQhO4dGt2FRM9AMkxvA3LaADOF1n8in/zGJlWji9fmafLoNyz+FoL6FE0SLtGIArD7w==}
@@ -3017,6 +3025,16 @@ packages:
       prelude-ls: 1.2.1
       type-check: 0.4.0
     dev: true
+
+  /libsodium-wrappers/0.7.10:
+    resolution: {integrity: sha512-pO3F1Q9NPLB/MWIhehim42b/Fwb30JNScCNh8TcQ/kIc+qGLQch8ag8wb0keK3EP5kbGakk1H8Wwo7v+36rNQg==}
+    dependencies:
+      libsodium: 0.7.10
+    dev: false
+
+  /libsodium/0.7.10:
+    resolution: {integrity: sha512-eY+z7hDrDKxkAK+QKZVNv92A5KYkxfvIshtBJkmg5TSiCnYqZP3i9OO9whE79Pwgm4jGaoHgkM4ao/b9Cyu4zQ==}
+    dev: false
 
   /lines-and-columns/1.2.4:
     resolution: {integrity: sha512-7ylylesZQ/PV29jhEDl3Ufjo6ZX7gCqJr5F7PKrqc93v7fzSymt1BpwEU8nAUXs8qzzvqhbjhK5QZg6Mt/HkBg==}
