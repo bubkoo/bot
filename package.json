@@ -1,6 +1,6 @@
 {
   "name": "bot",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "private": true,
   "description": "A GitHub App for me",
   "scripts": {
