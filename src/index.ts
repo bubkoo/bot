@@ -1,9 +1,10 @@
+/* eslint-disable no-console */
+
 import { Probot } from 'probot'
 import { wip } from './wip'
 
 export = (app: Probot) => {
   app.onAny(async (context: any) => {
-    // eslint-disable-next-line no-console
     console.log(`event: ${context.name}`)
 
     // const appId = Number(core.getInput('app_id', { required }))
@@ -21,13 +22,13 @@ export = (app: Probot) => {
     const installations = await client.paginate(client.apps.listInstallations)
 
     // context.log(context.payload as any)
-    context.log((context.payload as any).installation)
-    context.log(installations)
+    console.log((context.payload as any).installation)
+    console.log(installations)
 
     const result = await client.apps.createInstallationAccessToken({
       installation_id: installations[0].id,
     })
-    context.log(result.data.token)
+    console.log(result.data.token)
 
     // // 1. Retrieve JSON Web Token (JWT) to authenticate as app
     // const { token: jwt } = await client.auth({ type: 'app' })
