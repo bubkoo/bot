@@ -20,14 +20,14 @@ export = (app: Probot) => {
     const client = await app.auth()
     const installations = await client.paginate(client.apps.listInstallations)
 
-    context.log(context.payload as any)
+    // context.log(context.payload as any)
     context.log((context.payload as any).installation)
     context.log(installations)
 
     const result = await client.apps.createInstallationAccessToken({
       installation_id: installations[0].id,
     })
-    context.log(result)
+    context.log(result.data.token)
 
     // // 1. Retrieve JSON Web Token (JWT) to authenticate as app
     // const { token: jwt } = await client.auth({ type: 'app' })
