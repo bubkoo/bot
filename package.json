@@ -18,9 +18,9 @@
   },
   "license": "MIT",
   "dependencies": {
+    "@wow-actions/app-token": "^1.0.3",
     "gemoji": "^6.1.0",
     "js-yaml": "^4.1.0",
-    "libsodium-wrappers": "^0.7.10",
     "lodash": "^4.17.20",
     "probot": "^12.2.8",
     "uuid": "^9.0.0"
@@ -30,7 +30,6 @@
     "@bubkoo/eslint-config": "^1.2.0",
     "@bubkoo/tsconfig": "^1.0.0",
     "@types/js-yaml": "^4.0.3",
-    "@types/libsodium-wrappers": "^0.7.10",
     "@types/lodash": "^4.14.161",
     "@types/node": "^18.11.5",
     "@types/uuid": "^8.3.1",

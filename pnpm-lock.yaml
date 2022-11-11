@@ -5,16 +5,15 @@ specifiers:
   '@bubkoo/eslint-config': ^1.2.0
   '@bubkoo/tsconfig': ^1.0.0
   '@types/js-yaml': ^4.0.3
-  '@types/libsodium-wrappers': ^0.7.10
   '@types/lodash': ^4.14.161
   '@types/node': ^18.11.5
   '@types/uuid': ^8.3.1
+  '@wow-actions/app-token': ^1.0.3
   eslint: ^8.26.0
   gemoji: ^6.1.0
   husky: ^8.0.1
   is-ci: ^3.0.1
   js-yaml: ^4.1.0
-  libsodium-wrappers: ^0.7.10
   lodash: ^4.17.20
   nock: ^13.0.5
   nodemon: ^2.0.4
@@ -29,9 +28,9 @@ specifiers:
   uuid: ^9.0.0
 
 dependencies:
+  '@wow-actions/app-token': 1.0.3
   gemoji: 6.1.0
   js-yaml: 4.1.0
-  libsodium-wrappers: 0.7.10
   lodash: 4.17.21
   probot: 12.2.8
   uuid: 9.0.0
@@ -41,7 +40,6 @@ devDependencies:
   '@bubkoo/eslint-config': 1.2.0_pcit6nykmxit3vv6c7deq76n7y
   '@bubkoo/tsconfig': 1.0.0_typescript@4.8.4
   '@types/js-yaml': 4.0.5
-  '@types/libsodium-wrappers': 0.7.10
   '@types/lodash': 4.14.188
   '@types/node': 18.11.9
   '@types/uuid': 8.3.4
@@ -899,10 +897,6 @@ packages:
       '@types/node': 18.11.9
     dev: false
 
-  /@types/libsodium-wrappers/0.7.10:
-    resolution: {integrity: sha512-BqI9B92u+cM3ccp8mpHf+HzJ8fBlRwdmyd6+fz3p99m3V6ifT5O3zmOMi612PGkpeFeG/G6loxUnzlDNhfjPSA==}
-    dev: true
-
   /@types/lodash/4.14.188:
     resolution: {integrity: sha512-zmEmF5OIM3rb7SbLCFYoQhO4dGt2FRM9AMkxvA3LaADOF1n8in/zGJlWji9fmafLoNyz+FoL6FE0SLtGIArD7w==}
     dev: true
@@ -1106,6 +1100,17 @@ packages:
       '@typescript-eslint/types': 5.42.1
       eslint-visitor-keys: 3.3.0
     dev: true
+
+  /@wow-actions/app-token/1.0.3:
+    resolution: {integrity: sha512-LmJd7YruBdbGrhixkxgcWk6Bl5w/07fi8lYCxtnzSC1lwdS+I8MZxGMv1TY8vIH7nf4NQqMYYla3M3z4MV5jdA==}
+    engines: {node: '>= 14'}
+    dependencies:
+      libsodium-wrappers: 0.7.10
+      probot: 12.2.8
+    transitivePeerDependencies:
+      - encoding
+      - supports-color
+    dev: false
 
   /abbrev/1.1.1:
     resolution: {integrity: sha512-nne9/IiQ/hzIhY6pdDnbBtz7DjPTKrY00P/zvPSm5pOFkl6xuGrGnXn/VtTNNfNtAfZ9/1RtehkszU9qcTii0Q==}

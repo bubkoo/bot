@@ -1,7 +1,7 @@
 import { Probot } from 'probot'
 import { run } from './core'
 
-export function wip(app: Probot) {
+export = (app: Probot) => {
   try {
     app.on(
       [
