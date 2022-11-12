@@ -1,13 +1,13 @@
 import { Probot } from 'probot'
-import bot from '@wow-actions/app-token'
+import token from '@wow-actions/app-token'
 import wip from './wip'
 
-export = (app: Probot) => {
+export = async (app: Probot) => {
   app.onAny(async (context: any) => {
     // eslint-disable-next-line no-console
-    console.log(`>>>>>>>>>> event: ${context.name} <<<<<<<<<<`)
+    console.log(`event: ${context.name}`)
   })
 
-  bot(app)
+  token(app)
   wip(app)
 }
