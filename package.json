@@ -26,7 +26,7 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@wow-actions/app-token": "^1.0.3",
+    "@wow-actions/app-token": "^1.0.4",
     "gemoji": "6.1.0",
     "js-yaml": "^4.1.0",
     "lodash": "^4.17.20",
