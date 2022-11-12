@@ -12,6 +12,14 @@
     "prebuild": "run-s clean",
     "prepare": "is-ci || husky install .husky"
   },
+  "lint-staged": {
+    "**/*.{js,jsx,tsx,ts,less,md,json}": [
+      "pretty-quick —-staged"
+    ],
+    "*.ts": [
+      "eslint --fix"
+    ]
+  },
   "author": {
     "name": "bubkooo",
     "email": "bubkoo.wy@gmail.com"
@@ -19,7 +27,7 @@
   "license": "MIT",
   "dependencies": {
     "@wow-actions/app-token": "^1.0.3",
-    "gemoji": "^6.1.0",
+    "gemoji": "6.1.0",
     "js-yaml": "^4.1.0",
     "lodash": "^4.17.20",
     "probot": "^12.2.8",
@@ -46,16 +54,9 @@
     "tslib": "^2.4.0",
     "typescript": "^4.8.2"
   },
-  "lint-staged": {
-    "**/*.{js,jsx,tsx,ts,less,md,json}": [
-      "pretty-quick —-staged"
-    ],
-    "*.ts": [
-      "eslint --fix"
-    ]
-  },
+
   "engines": {
-    "node": ">= 10.13.0"
+    "node": "^16.x || ^18.x"
   },
   "repository": "https://github.com/bubkoo/bot.git",
   "homepage": "https://github.com/bubkoo/bot",
