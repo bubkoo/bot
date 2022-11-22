@@ -1,3 +1,10 @@
+# [1.2.0](https://github.com/bubkoo/bot/compare/v1.1.8...v1.2.0) (2022-11-22)
+
+
+### Features
+
+* support vercel ([1a4044b](https://github.com/bubkoo/bot/commit/1a4044b1dae358625b7e0c9481b0bf19c09dca86))
+
 ## [1.1.8](https://github.com/bubkoo/bot/compare/v1.1.7...v1.1.8) (2022-11-12)
 
 ## [1.1.7](https://github.com/bubkoo/bot/compare/v1.1.6...v1.1.7) (2022-11-12)
