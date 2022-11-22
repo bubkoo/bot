@@ -10,7 +10,7 @@ specifiers:
   '@types/uuid': ^8.3.1
   '@wow-actions/app-token': ^1.1.7
   eslint: ^8.28.0
-  gemoji: 8.0.0
+  gemoji: 7.1.0
   husky: ^8.0.1
   is-ci: ^3.0.1
   js-yaml: ^4.1.0
@@ -29,7 +29,7 @@ specifiers:
 
 dependencies:
   '@wow-actions/app-token': 1.1.7_probot@12.2.8
-  gemoji: 8.0.0
+  gemoji: 7.1.0
   js-yaml: 4.1.0
   lodash: 4.17.21
   probot: 12.2.8
@@ -2477,8 +2477,8 @@ packages:
     resolution: {integrity: sha512-xckBUXyTIqT97tq2x2AMb+g163b5JFysYk0x4qxNFwbfQkmNZoiRHb6sPzI9/QV33WeuvVYBUIiD4NzNIyqaRQ==}
     dev: true
 
-  /gemoji/8.0.0:
-    resolution: {integrity: sha512-MNjL3CO4OIq07S3GV1KZ6Wedz+iNmdPBuqylZtMAimdaw7Zsvp2xbjEuiST53YQXp6SBMFC4aMje6epYm85lMQ==}
+  /gemoji/7.1.0:
+    resolution: {integrity: sha512-wI0YWDIfQraQMDs0yXAVQiVBZeMm/rIYssf8LZlMDdssKF19YqJKOHkv4zvwtVQTBJ0LNmErv1S+DqlVUudz8g==}
     dev: false
 
   /gensync/1.0.0-beta.2:
