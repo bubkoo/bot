@@ -4,7 +4,6 @@ author: bubkoo <bubkoo.wy@gmail.com>
 branding:
   icon: check-circle
   color: green
-  
 inputs:
   id:
     description: The ID of run (provided by GitHub app via `github.event.client_payload.id`)
