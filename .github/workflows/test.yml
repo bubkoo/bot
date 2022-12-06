@@ -9,7 +9,7 @@ jobs:
     - uses: bubkoo/bot@master
       with:
         id: ${{ github.event.client_payload.id }}
-        callback_url: ${{ github.event.client_payload.callback_url }}
+        callback_url: https://bubkoo-bot.onrender.com/rsw/register
         sha: ${{ github.event.client_payload.sha }}
         run_id: ${{ github.run_id }}
         name: "Central markdown check"
@@ -19,7 +19,7 @@ jobs:
     - uses: bubkoo/bot/src/rsw@master
       with:
         id: ${{ github.event.client_payload.id }}
-        callback_url: ${{ github.event.client_payload.callback_url }}
+        callback_url: https://bubkoo-bot.onrender.com/rsw/register
         sha: ${{ github.event.client_payload.sha }}
         run_id: ${{ github.run_id }}
         name: "Central markdown check"
