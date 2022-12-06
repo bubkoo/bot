@@ -1,5 +1,4 @@
 import * as mongoose from 'mongoose'
-import { HOST_REPO } from './constants'
 
 const expiry = 60 * 60 * 24 * 30 // 30 days
 
@@ -65,19 +64,3 @@ RunSchema.index(
 export const MODEL_NAME = 'workflow-runs'
 
 export const Runs = mongoose.model<IRun>(MODEL_NAME, RunSchema)
-
-// Update existing document with config.host_repo field
-Runs.updateOne(
-  { 'config.host_repo': { $exists: false } },
-  { $set: { config: { host_repo: HOST_REPO } } },
-  { new: true, multi: true },
-  (err, numberAffected) => {
-    if (err) {
-      throw err
-    }
-    if (numberAffected?.ok) {
-      // eslint-disable-next-line no-console
-      console.log('updated', numberAffected.nModified, 'rows')
-    }
-  },
-)

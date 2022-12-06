@@ -67,9 +67,6 @@ export async function register(req: any, res: any, app: Probot): Promise<any> {
   //   enforce_admin === 'true' && run.repo.name !== run.config.host_repo,
   // )
 
-  // eslint-disable-next-line no-console
-  // console.log(checks_run)
-
   const checkInfo: ICheck = {
     name: data.name,
     run_id: Number(run_id),

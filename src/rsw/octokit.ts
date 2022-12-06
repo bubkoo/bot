@@ -14,9 +14,6 @@ export function getDispatchEvents(context: Context, prefix: string) {
     events.push(`${prefix}.${event}.${action}`)
   }
 
-  // eslint-disable-next-line no-console
-  console.log(context.name, (context.payload as any).action, events)
-
   return events
 }
 
@@ -76,11 +73,12 @@ export async function dispatchEvents(
   const repo = ctx.payload.repository
   const owner = repo.owner
   const config = await getConfig(ctx)
-  // eslint-disable-next-line no-console
-  console.log(config)
+
   if (!shouldRun(repo.name, config.includes, config.excludes)) {
     return
   }
+
+  context.log.info(`config: ${JSON.stringify(config, null, 2)}`)
 
   const callback = await getCallbackUrl(context)
 
@@ -108,11 +106,9 @@ export async function dispatchEvents(
 
   const { appToken, appName } = await getAppToken(app, context)
   const events = getDispatchEvents(context, config.eventPrefix)
-  // eslint-disable-next-line no-console
-  console.log(process.env.GITHUB_EVENT_PATH)
-  // console.log(JSON.stringify(context.payload))
   // eslint-disable-next-line no-restricted-syntax
   for (const event of events) {
+    context.log.info(`dispatch event: ${event}`)
     // eslint-disable-next-line no-await-in-loop
     await context.octokit.repos.createDispatchEvent({
       owner: owner.login,

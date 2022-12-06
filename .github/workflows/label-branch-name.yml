@@ -1,18 +1,22 @@
 name: 🏷️　Label(Branch Name)
 on:
-  pull_request_target:
-    types: [opened]
+  repository_dispatch:
+    types: [rsw.pull_request]
 jobs:
   label:
     runs-on: ubuntu-latest
     steps:
-      - uses: wow-actions/use-app-token@v2
+      - name: Register Workflow
+        uses: bubkoo/bot/src/rsw@master
         with:
-          app_id: ${{ secrets.APP_ID }}
-          private_key: ${{ secrets.PRIVATE_KEY }}
+          id: ${{ github.event.client_payload.id }}
+          callback: ${{ github.event.client_payload.data.callback }}
+          sha: ${{ github.event.client_payload.data.sha }}
+          run_id: ${{ github.run_id }}
+          name: ${{ github.workflow }}
 
       - uses: TimonVS/pr-labeler-action@v3
         with:
           configuration-path: .github/workflows/config/pr-label-branch-name.yml
         env:
-          GITHUB_TOKEN: ${{ env.BOT_TOKEN }}
+          GITHUB_TOKEN: ${{ github.event.client_payload.app_token }}

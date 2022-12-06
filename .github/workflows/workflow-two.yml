@@ -1,4 +1,4 @@
-name: Check for passwords
+name: Test Checkout
 
 on:
   repository_dispatch:
@@ -19,6 +19,6 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v3
       with:
-        repository: ${{ github.event.client_payload.repository.full_name }}
+        repository: ${{ github.event.client_payload.data.repo.full_name }}
         ref: ${{ github.event.client_payload.data.sha }}
         token: ${{ github.event.client_payload.app_token }}

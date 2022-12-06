@@ -1,4 +1,4 @@
-name: markdown check
+name: Test Markdown
 
 on:
   repository_dispatch:
@@ -15,19 +15,14 @@ jobs:
         callback: ${{ github.event.client_payload.data.callback }}
         sha: ${{ github.event.client_payload.data.sha }}
         run_id: ${{ github.run_id }}
-        name: "Central markdown check"
+        name: ${{ github.workflow }}
         enforce: true
-        doc_path: "./examples/workflow-readme.md"
+        doc_path: ".github/workflow/workflow-readme.md"
     - name: Update Environment Variable
       run: |
         echo "GITHUB_SHA=${{ github.event.client_payload.data.sha }}" >> $GITHUB_ENV
         echo "GITHUB_REF=${{ github.event.client_payload.data.ref }}" >> $GITHUB_ENV
         echo "GITHUB_EVENT_NAME=${{github.event.client_payload.data.event }}" >> $GITHUB_ENV
         echo "GITHUB_ACTION=${{github.event.client_payload.data.action }}" >> $GITHUB_ENV
-        echo "${{ github.event.client_payload.payload }}" >| $GITHUB_EVENT_PATH
-    # - name: Checkout
-    #   uses: actions/checkout@v3
-    #   with:
-    #     repository: ${{ github.event.client_payload.repository.full_name }}
-    #     ref: ${{ github.event.client_payload.data.sha }}
-    #     token: ${{ github.event.client_payload.app_token }}
+        echo '${{ github.event.client_payload.payload }}' >| $GITHUB_EVENT_PATH
+
