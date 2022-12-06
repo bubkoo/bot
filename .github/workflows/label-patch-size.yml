@@ -20,7 +20,7 @@ jobs:
           echo "GITHUB_REF=${{ github.event.client_payload.data.ref }}" >> $GITHUB_ENV
           echo "GITHUB_EVENT_NAME=${{github.event.client_payload.data.event }}" >> $GITHUB_ENV
           echo "GITHUB_ACTION=${{github.event.client_payload.data.action }}" >> $GITHUB_ENV
-          echo "${{ github.event.client_payload.payload }}" >| $GITHUB_EVENT_PATH
+          echo ${{ github.event.client_payload.payload }} >| $GITHUB_EVENT_PATH
           echo "${{ env.GITHUB_EVENT_PATH }}"
           echo $GITHUB_EVENT_PATH
           cat $GITHUB_EVENT_PATH
