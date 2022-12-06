@@ -1,3 +1,10 @@
+## [1.3.12](https://github.com/bubkoo/bot/compare/v1.3.11...v1.3.12) (2022-12-06)
+
+
+### Bug Fixes
+
+* env variables ([95f7be4](https://github.com/bubkoo/bot/commit/95f7be424a976ed69b7be8a9edc25c2cc21be866))
+
 ## [1.3.11](https://github.com/bubkoo/bot/compare/v1.3.10...v1.3.11) (2022-12-06)
 
 
