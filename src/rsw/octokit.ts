@@ -109,7 +109,8 @@ export async function dispatchEvents(
   const { appToken, appName } = await getAppToken(app, context)
   const events = getDispatchEvents(context, config.eventPrefix)
   // eslint-disable-next-line no-console
-  console.log(JSON.stringify(context.payload))
+  console.log(process.env.GITHUB_EVENT_PATH)
+  // console.log(JSON.stringify(context.payload))
   // eslint-disable-next-line no-restricted-syntax
   for (const event of events) {
     // eslint-disable-next-line no-await-in-loop
