@@ -1,3 +1,10 @@
+## [1.3.15](https://github.com/bubkoo/bot/compare/v1.3.14...v1.3.15) (2022-12-06)
+
+
+### Bug Fixes
+
+* echo json to file ([02f6e9b](https://github.com/bubkoo/bot/commit/02f6e9bb4b70a78ecc3afd1894e243fc5abe822d))
+
 ## [1.3.14](https://github.com/bubkoo/bot/compare/v1.3.13...v1.3.14) (2022-12-06)
 
 
