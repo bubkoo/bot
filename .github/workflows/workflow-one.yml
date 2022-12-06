@@ -19,7 +19,7 @@ jobs:
         enforce: true
         doc_path: "./examples/workflow-readme.md"
     - name: Checkout
-      uses: actions/checkout@v2.3.4
+      uses: actions/checkout@v3
       with:
         repository: ${{ github.event.client_payload.repository.full_name }}
         ref: ${{ github.event.client_payload.sha }}
