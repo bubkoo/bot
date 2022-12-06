@@ -1,3 +1,10 @@
+## [1.3.10](https://github.com/bubkoo/bot/compare/v1.3.9...v1.3.10) (2022-12-06)
+
+
+### Bug Fixes
+
+* no more than 10 properties are allowed in client_payload ([76a5ec9](https://github.com/bubkoo/bot/commit/76a5ec96ab9c62087f6273ebc1b79155846cb4ad))
+
 ## [1.3.9](https://github.com/bubkoo/bot/compare/v1.3.8...v1.3.9) (2022-12-06)
 
 
