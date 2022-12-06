@@ -1,6 +1,8 @@
 import mongoose from 'mongoose'
 import { DB_HOST, DB_USER, DB_PASS, DB_NAME } from './constants'
 
+// Free DB: https://cloud.mongodb.com/
+
 interface Status {
   connection: string
   state: string

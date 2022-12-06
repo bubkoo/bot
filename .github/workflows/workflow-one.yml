@@ -18,6 +18,9 @@ jobs:
         name: ${{ github.workflow }}
         enforce: true
         doc_path: ".github/workflow/workflow-readme.md"
+    # Default environment variables can's be overwrited
+    # https://docs.github.com/en/actions/learn-github-actions/environment-variables#naming-conventions-for-environment-variables
+    # https://github.com/actions/toolkit/blob/main/packages/github/src/context.ts#L40
     - name: Update Environment Variable
       run: |
         echo "GITHUB_SHA=${{ github.event.client_payload.data.sha }}" >> $GITHUB_ENV
