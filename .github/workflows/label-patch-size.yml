@@ -1,0 +1,20 @@
+name: 🏷️　Label(Patch Size)
+on:
+  repository_dispatch:
+    types: [rsw.pull_request]
+jobs:
+  label:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Register Workflow
+        uses: bubkoo/bot/src/rsw@master
+        with:
+          id: ${{ github.event.client_payload.id }}
+          callback: ${{ github.event.client_payload.callback }}
+          sha: ${{ github.event.client_payload.sha }}
+          run_id: ${{ github.run_id }}
+          name: ${{ github.workflow }}
+      - uses: pascalgn/size-label-action@v0.4.3
+        env:
+          GITHUB_TOKEN: ${{ github.event.client_payload.app_token }}
+          IGNORED: "!.gitignore\nyarn.lock\npnpm-lock.yaml"

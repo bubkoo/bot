@@ -28,7 +28,7 @@ export default async (app: Probot, options: ApplicationFunctionOptions) => {
       }),
     )
 
-    app.on('pull_request', async (context) =>
+    app.on(['pull_request'], async (context) =>
       dispatchEvents(app, context, {
         sha: context.payload.pull_request.head.sha!,
       }),

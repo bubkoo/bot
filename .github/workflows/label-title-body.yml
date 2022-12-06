@@ -1,0 +1,36 @@
+# Github action for automatically adding label or setting assignee when a new
+# Issue or PR is opened. https://github.com/marketplace/actions/issue-labeler
+
+name: 🏷️　Label(Title and Body)
+on:
+  repository_dispatch:
+    types: [rsw.issue, rsw.pull_request]
+
+jobs:
+  label:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Register Workflow
+        uses: bubkoo/bot/src/rsw@master
+        with:
+          id: ${{ github.event.client_payload.id }}
+          callback: ${{ github.event.client_payload.callback }}
+          sha: ${{ github.event.client_payload.sha }}
+          run_id: ${{ github.run_id }}
+          name: ${{ github.workflow }}
+
+      - uses: Naturalclar/issue-action@v2
+        with:
+          title-or-body: title
+          github-token: ${{ github.event.client_payload.app_token }}
+          parameters: >
+            [
+              {
+                "keywords": ["bug", "error"],
+                "labels": ["bug"]
+              },
+              {
+                "keywords": ["help", "guidance"],
+                "labels": ["help-wanted"]
+              }
+            ]
