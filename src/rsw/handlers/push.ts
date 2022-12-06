@@ -3,15 +3,15 @@ import { Context } from 'probot'
 import { IRun, Runs } from '../db-model'
 import { ROUTE_NAME } from '../constants'
 import { getConfig } from '../config'
-import { shouldRun } from '../util'
+// import { shouldRun } from '../util'
 
 export async function push(context: Context<'push'>) {
   const repo = context.payload.repository
   const owner = repo.owner
   const config = await getConfig(context)
-  if (!shouldRun(repo.name, config.excludes)) {
-    return
-  }
+  // if (!shouldRun(repo.name, config.excludes)) {
+  //   return
+  // }
 
   const sha = context.payload.after
   const webhook = await context.octokit.apps.getWebhookConfigForApp()
