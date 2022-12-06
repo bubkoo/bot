@@ -1,3 +1,11 @@
+# [1.3.0](https://github.com/bubkoo/bot/compare/v1.2.1...v1.3.0) (2022-12-06)
+
+
+### Features
+
+* add app config ([79faa82](https://github.com/bubkoo/bot/commit/79faa8272fbdcf945a2e6df5e1225f43cd9a03c0))
+* run shared workflows ([0e880f2](https://github.com/bubkoo/bot/commit/0e880f2755b6492cf0ff241ecfddce3c9eea5db5))
+
 ## [1.2.1](https://github.com/bubkoo/bot/compare/v1.2.0...v1.2.1) (2022-11-23)
 
 # [1.2.0](https://github.com/bubkoo/bot/compare/v1.1.8...v1.2.0) (2022-11-22)
