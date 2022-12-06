@@ -1,3 +1,10 @@
+## [1.3.9](https://github.com/bubkoo/bot/compare/v1.3.8...v1.3.9) (2022-12-06)
+
+
+### Bug Fixes
+
+* overwrite payload ([bc5d8fa](https://github.com/bubkoo/bot/commit/bc5d8fa4dc0cb6563f068cc74091068931b71057))
+
 ## [1.3.8](https://github.com/bubkoo/bot/compare/v1.3.7...v1.3.8) (2022-12-06)
 
 ## [1.3.7](https://github.com/bubkoo/bot/compare/v1.3.6...v1.3.7) (2022-12-06)
