@@ -14,8 +14,8 @@ inputs:
   name:
     description: The name of check (Use `github.workflow` to use the name of the workflow)
     required: true
-  callback_url:
-    description: The callback url for register call (provided by GitHub app via `github.event.client_payload.callback_url`)
+  callback:
+    description: The callback url for register call (provided by GitHub app via `github.event.client_payload.callback`)
     required: true
   sha:
     description: The sha of original commit (provided by GitHub app via `github.event.client_payload.sha`)
@@ -36,7 +36,7 @@ runs:
   steps:
     - run: |
         curl -G \
-          "${{ inputs.callback_url }}" \
+          "${{ inputs.callback }}" \
           -d id=${{ inputs.id }} \
           -d run_id=${{ inputs.run_id }} \
           -d sha=${{ inputs.sha }} \

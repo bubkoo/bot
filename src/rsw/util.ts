@@ -1,13 +1,12 @@
 import { Context } from 'probot'
+import minimatch from 'minimatch'
 
 export function fixRouter(router: string) {
   return router.startsWith('/') ? router : `/${router}`
 }
 
 export function shouldRun(repo: string, exclude: string[]) {
-  return !exclude.some((item: string) =>
-    new RegExp(`^${item.replace(/\*/g, '.*')}$`).test(repo),
-  )
+  return !exclude.some((item: string) => minimatch(repo, item))
 }
 
 export async function enforceProtection(
@@ -32,7 +31,7 @@ export async function enforceProtection(
       branch: repo.data.default_branch,
     })
   } catch (e) {
-    console.error(e)
+    // console.error(e)
   }
 
   const contexts =

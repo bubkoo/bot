@@ -2,7 +2,7 @@ name: markdown check
 
 on:
   repository_dispatch:
-    types: [rsw-bot]
+    types: [rsw.push, rsw.pull_request]
 
 jobs:
   register:
@@ -12,7 +12,7 @@ jobs:
       uses: bubkoo/bot/src/rsw@master
       with:
         id: ${{ github.event.client_payload.id }}
-        callback_url: ${{ github.event.client_payload.callback_url }}
+        callback: ${{ github.event.client_payload.callback }}
         sha: ${{ github.event.client_payload.sha }}
         run_id: ${{ github.run_id }}
         name: "Central markdown check"
@@ -23,6 +23,4 @@ jobs:
       with:
         repository: ${{ github.event.client_payload.repository.full_name }}
         ref: ${{ github.event.client_payload.sha }}
-        token: ${{ github.event.client_payload.token }}
-    - name: Markdown Lint
-      uses: ruzickap/action-my-markdown-linter@v1
+        token: ${{ github.event.client_payload.app_token }}

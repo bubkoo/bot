@@ -1,4 +1,5 @@
 import * as mongoose from 'mongoose'
+import { HOST_REPO } from './constants'
 
 const expiry = 60 * 60 * 24 * 30 // 30 days
 
@@ -13,7 +14,7 @@ export interface ICheck {
 
 export interface IRun extends mongoose.Document {
   sha: string
-  callback_url: string
+  callback: string
   checks: Array<ICheck>
   repo: {
     owner: string
@@ -28,7 +29,7 @@ export interface IRun extends mongoose.Document {
 
 export const RunSchema = new mongoose.Schema({
   sha: String,
-  callback_url: String,
+  callback: String,
   checks: [
     {
       run_id: Number,
@@ -62,11 +63,11 @@ export const Runs = mongoose.model<IRun>(MODEL_NAME, RunSchema)
 // Update existing document with config.host_repo field
 Runs.updateOne(
   { 'config.host_repo': { $exists: false } },
-  { $set: { config: { host_repo: '.github' } } },
+  { $set: { config: { host_repo: HOST_REPO } } },
   { new: true, multi: true },
   (err, numberAffected) => {
     if (err) {
-      return console.error(err)
+      throw err
     }
     if (numberAffected?.ok) {
       // eslint-disable-next-line no-console

@@ -1,30 +1,24 @@
-import path from 'path'
 import { Probot, Context } from 'probot'
 import { IRun, Runs } from '../db-model'
-import { ROUTE_NAME } from '../constants'
 import { getConfig } from '../config'
-// import { shouldRun } from '../util'
+import { shouldRun } from '../util'
+import { getCallbackUrl, getAppToken } from '../octokit'
 
 export async function push(context: Context<'push'>, app: Probot) {
   const repo = context.payload.repository
   const owner = repo.owner
   const config = await getConfig(context)
-  // if (!shouldRun(repo.name, config.excludes)) {
-  //   return
-  // }
+
+  if (!shouldRun(repo.name, config.excludes)) {
+    return
+  }
 
   const sha = context.payload.after
-  const webhook = await context.octokit.apps.getWebhookConfigForApp()
-  const client = await app.auth()
-  const {
-    data: { token },
-  } = await client.apps.createInstallationAccessToken({
-    installation_id: context.payload.installation!.id,
-  })
+  const callback = await getCallbackUrl(context as any)
 
   const data: Partial<IRun> = {
     sha,
-    callback_url: path.join(webhook.data.url!, ROUTE_NAME, 'register'),
+    callback,
     repo: {
       owner: owner.login,
       name: repo.name,
@@ -41,15 +35,17 @@ export async function push(context: Context<'push'>, app: Probot) {
   })
 
   const { _id } = await run.save()
+  const { appToken, appName } = await getAppToken(app, context as any)
 
   await context.octokit.repos.createDispatchEvent({
     owner: owner.login,
     repo: config.repo,
-    event_type: config.eventType,
+    event_type: config.eventPrefix,
     client_payload: {
       ...data,
-      token,
       id: _id.toString(),
+      app_name: appName,
+      app_token: appToken,
       event: context.payload,
     },
   })

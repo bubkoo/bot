@@ -7,6 +7,7 @@
     "clean": "rimraf lib",
     "lint": "eslint 'src/**/*.{js,ts}?(x)' --fix",
     "build": "tsc",
+    "build:watch": "tsc -w",
     "dev": "nodemon --exec \"npm start\"",
     "start": "probot run ./lib/index.js",
     "prebuild": "run-s clean",
@@ -30,6 +31,7 @@
     "gemoji": "6.1.0",
     "js-yaml": "^4.1.0",
     "lodash": "^4.17.20",
+    "minimatch": "^5.1.1",
     "mongoose": "^6.7.5",
     "probot": "^12.2.8",
     "uuid": "^9.0.0"
@@ -40,6 +42,7 @@
     "@bubkoo/tsconfig": "^1.0.0",
     "@types/js-yaml": "^4.0.3",
     "@types/lodash": "^4.14.189",
+    "@types/minimatch": "^5.1.2",
     "@types/node": "^18.11.5",
     "@types/uuid": "^8.3.1",
     "eslint": "^8.28.0",

@@ -1,15 +1,15 @@
 import { Context } from 'probot'
-import { CONFIG_PATH, HOST_REPO, EVENT_TYPE } from './constants'
+import { CONFIG_PATH, HOST_REPO, EVENT_PREFIX } from './constants'
 
 export interface Configuration {
   repo: string
   excludes: string[]
-  eventType: string
+  eventPrefix: string
 }
 
 const defaults: Configuration = {
   repo: HOST_REPO,
-  eventType: EVENT_TYPE,
+  eventPrefix: EVENT_PREFIX,
   excludes: [],
 }
 
