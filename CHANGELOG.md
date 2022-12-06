@@ -1,3 +1,5 @@
+## [1.3.8](https://github.com/bubkoo/bot/compare/v1.3.7...v1.3.8) (2022-12-06)
+
 ## [1.3.7](https://github.com/bubkoo/bot/compare/v1.3.6...v1.3.7) (2022-12-06)
 
 
