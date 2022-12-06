@@ -1,3 +1,10 @@
+## [1.3.13](https://github.com/bubkoo/bot/compare/v1.3.12...v1.3.13) (2022-12-06)
+
+
+### Bug Fixes
+
+* echo GITHUB_EVENT_PATH ([c7a4916](https://github.com/bubkoo/bot/commit/c7a4916f4bbb7eb090e0e9ccffe96f782547ec8e))
+
 ## [1.3.12](https://github.com/bubkoo/bot/compare/v1.3.11...v1.3.12) (2022-12-06)
 
 
