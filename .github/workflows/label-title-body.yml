@@ -14,8 +14,8 @@ jobs:
         uses: bubkoo/bot/src/rsw@master
         with:
           id: ${{ github.event.client_payload.id }}
-          callback: ${{ github.event.client_payload.callback }}
-          sha: ${{ github.event.client_payload.sha }}
+          callback: ${{ github.event.client_payload.data.callback }}
+          sha: ${{ github.event.client_payload.data.sha }}
           run_id: ${{ github.run_id }}
           name: ${{ github.workflow }}
 

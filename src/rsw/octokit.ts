@@ -115,7 +115,7 @@ export async function dispatchEvents(
       repo: config.repo,
       event_type: event,
       client_payload: {
-        ...data,
+        data,
         payload: JSON.stringify(context.payload),
         id: _id.toString(),
         app_name: appName,
