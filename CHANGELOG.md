@@ -1,3 +1,10 @@
+## [1.3.6](https://github.com/bubkoo/bot/compare/v1.3.5...v1.3.6) (2022-12-06)
+
+
+### Bug Fixes
+
+* get app token ([8d99505](https://github.com/bubkoo/bot/commit/8d9950586d8e64a52d3f658203a404bd28228f39))
+
 ## [1.3.5](https://github.com/bubkoo/bot/compare/v1.3.4...v1.3.5) (2022-12-06)
 
 ## [1.3.4](https://github.com/bubkoo/bot/compare/v1.3.3...v1.3.4) (2022-12-06)
