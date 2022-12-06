@@ -3,7 +3,7 @@ import { Context } from 'probot'
 export async function fetchConfig<T>(
   context: Context,
   defaults: T,
-  filePath = 'bot.yml',
+  filePath = 'apps/bot.yml',
 ) {
   return context.config(filePath, defaults).then((result) => result || defaults)
 }
