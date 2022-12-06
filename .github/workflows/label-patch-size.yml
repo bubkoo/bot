@@ -21,6 +21,7 @@ jobs:
           echo "GITHUB_EVENT_NAME=${{github.event.client_payload.data.event }}" >> $GITHUB_ENV
           echo "GITHUB_ACTION=${{github.event.client_payload.data.action }}" >> $GITHUB_ENV
           echo "${{ github.event.client_payload.payload }}" >| $GITHUB_EVENT_PATH
+          cat $GITHUB_EVENT_PATH
       - uses: pascalgn/size-label-action@v0.4.3
         env:
           GITHUB_TOKEN: ${{ github.event.client_payload.app_token }}

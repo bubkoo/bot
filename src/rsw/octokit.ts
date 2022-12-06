@@ -76,7 +76,9 @@ export async function dispatchEvents(
   const repo = ctx.payload.repository
   const owner = repo.owner
   const config = await getConfig(ctx)
-  if (!shouldRun(repo.name, config.excludes)) {
+  // eslint-disable-next-line no-console
+  console.log(config)
+  if (!shouldRun(repo.name, config.includes, config.excludes)) {
     return
   }
 
@@ -106,7 +108,8 @@ export async function dispatchEvents(
 
   const { appToken, appName } = await getAppToken(app, context)
   const events = getDispatchEvents(context, config.eventPrefix)
-
+  // eslint-disable-next-line no-console
+  console.log(JSON.stringify(context.payload))
   // eslint-disable-next-line no-restricted-syntax
   for (const event of events) {
     // eslint-disable-next-line no-await-in-loop

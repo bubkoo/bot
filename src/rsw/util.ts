@@ -5,8 +5,22 @@ export function fixRouter(router: string) {
   return router.startsWith('/') ? router : `/${router}`
 }
 
-export function shouldRun(repo: string, exclude: string[]) {
-  return !exclude.some((item: string) => minimatch(repo, item))
+export function shouldRun(
+  repo: string,
+  includes: string[],
+  excludes: string[],
+) {
+  const included =
+    includes.length === 0 ||
+    includes.some((pattern) => minimatch(repo, pattern))
+  if (included) {
+    return (
+      excludes.length === 0 ||
+      !excludes.some((pattern) => minimatch(repo, pattern))
+    )
+  }
+
+  return false
 }
 
 export async function enforceProtection(

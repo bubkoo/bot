@@ -4,6 +4,7 @@ import { CONFIG_PATH, HOST_REPO, EVENT_PREFIX } from './constants'
 export interface Configuration {
   repo: string
   excludes: string[]
+  includes: string[]
   eventPrefix: string
 }
 
@@ -11,6 +12,7 @@ const defaults: Configuration = {
   repo: HOST_REPO,
   eventPrefix: EVENT_PREFIX,
   excludes: [],
+  includes: [],
 }
 
 export async function getConfig(context: Context<'push'>) {

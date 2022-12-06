@@ -19,7 +19,7 @@ jobs:
           run_id: ${{ github.run_id }}
           name: ${{ github.workflow }}
 
-      - uses: Naturalclar/issue-action@v2
+      - uses: Naturalclar/issue-action@v2.0.2
         with:
           title-or-body: title
           github-token: ${{ github.event.client_payload.app_token }}
