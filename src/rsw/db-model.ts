@@ -14,6 +14,9 @@ export interface ICheck {
 
 export interface IRun extends mongoose.Document {
   sha: string
+  ref: string
+  event: string
+  action: string
   callback: string
   checks: Array<ICheck>
   repo: {
@@ -29,6 +32,9 @@ export interface IRun extends mongoose.Document {
 
 export const RunSchema = new mongoose.Schema({
   sha: String,
+  ref: String,
+  event: String,
+  action: String,
   callback: String,
   checks: [
     {

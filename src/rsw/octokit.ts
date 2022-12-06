@@ -6,9 +6,8 @@ import { shouldRun } from './util'
 import { getConfig } from './config'
 
 export function getDispatchEvents(context: Context, prefix: string) {
-  const parts = context.name.split('.')
-  const event = parts[0]
-  const action = parts[1] || (context.payload as any).action
+  const event = context.name
+  const action = (context.payload as any).action
   const events: string[] = [`${prefix}.${event}`]
 
   if (action) {
@@ -71,7 +70,7 @@ export async function createOctokit(
 export async function dispatchEvents(
   app: Probot,
   context: Context,
-  data: Partial<IRun>,
+  inputs: Partial<IRun>,
 ) {
   const ctx = context as any as Context<'push'>
   const repo = ctx.payload.repository
@@ -83,9 +82,11 @@ export async function dispatchEvents(
 
   const callback = await getCallbackUrl(context)
 
-  const payload: Partial<IRun> = {
-    ...data,
+  const data: Partial<IRun> = {
+    ...inputs,
     callback,
+    event: context.name,
+    action: (context.payload as any).action || '',
     repo: {
       owner: owner.login,
       name: repo.name,
@@ -94,7 +95,7 @@ export async function dispatchEvents(
   }
 
   const run = new Runs({
-    ...payload,
+    ...data,
     checks: [],
     config: {
       host_repo: config.repo,
@@ -114,11 +115,12 @@ export async function dispatchEvents(
       repo: config.repo,
       event_type: event,
       client_payload: {
-        ...payload,
-        event,
+        ...data,
+        payload: JSON.stringify(context.payload),
         id: _id.toString(),
         app_name: appName,
         app_token: appToken,
+        event_type: event,
       },
     })
   }
