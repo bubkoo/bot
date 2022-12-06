@@ -4,6 +4,7 @@ author: bubkoo <bubkoo.wy@gmail.com>
 branding:
   icon: check-circle
   color: green
+  
 inputs:
   id:
     description: The ID of run (provided by GitHub app via `github.event.client_payload.id`)
@@ -31,6 +32,7 @@ inputs:
   doc_path:
     description: Link to documentation of this check. This is shown with the status check on the original commit. (eg `.github/workflows/compliance-info.md`)
     required: false
+    
 runs:
   using: composite
   steps:
