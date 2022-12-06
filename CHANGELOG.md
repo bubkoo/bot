@@ -1,3 +1,10 @@
+## [1.3.1](https://github.com/bubkoo/bot/compare/v1.3.0...v1.3.1) (2022-12-06)
+
+
+### Bug Fixes
+
+* rsw router ([620b9de](https://github.com/bubkoo/bot/commit/620b9ded0e16bc2bc0e8c643a36426b36bc25bd8))
+
 # [1.3.0](https://github.com/bubkoo/bot/compare/v1.2.1...v1.3.0) (2022-12-06)
 
 
