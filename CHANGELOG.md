@@ -1,3 +1,10 @@
+## [1.3.11](https://github.com/bubkoo/bot/compare/v1.3.10...v1.3.11) (2022-12-06)
+
+
+### Bug Fixes
+
+* unrecognized named-value: 'GITHUB_EVENT_PATH' ([c6f44e8](https://github.com/bubkoo/bot/commit/c6f44e8c109f925c30ecb9fbcadf1b9b53dda931))
+
 ## [1.3.10](https://github.com/bubkoo/bot/compare/v1.3.9...v1.3.10) (2022-12-06)
 
 
