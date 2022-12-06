@@ -1,3 +1,10 @@
+## [1.3.14](https://github.com/bubkoo/bot/compare/v1.3.13...v1.3.14) (2022-12-06)
+
+
+### Bug Fixes
+
+* overwrite event data ([e17fb97](https://github.com/bubkoo/bot/commit/e17fb97a01197f9eb7ca5cc65cefc0002f3ac0b7))
+
 ## [1.3.13](https://github.com/bubkoo/bot/compare/v1.3.12...v1.3.13) (2022-12-06)
 
 
