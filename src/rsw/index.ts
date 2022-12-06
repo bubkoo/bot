@@ -1,4 +1,5 @@
 import { Probot, ApplicationFunctionOptions } from 'probot'
+import { fixRouter } from './util'
 import { connectDB } from './db-connection'
 import { ROUTE_NAME } from './constants'
 import { push } from './handlers/push'
@@ -13,7 +14,7 @@ export default async (app: Probot, options: ApplicationFunctionOptions) => {
     app.on('check_run.rerequested', async (context) => rerun(context))
     app.on('workflow_run.completed', async (context) => complete(context))
 
-    const router = options.getRouter!(ROUTE_NAME)
+    const router = options.getRouter!(fixRouter(ROUTE_NAME))
 
     router.get('/register', (req, res) => register(req, res, app))
 

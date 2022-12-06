@@ -1,5 +1,9 @@
 import { Context } from 'probot'
 
+export function fixRouter(router: string) {
+  return router.startsWith('/') ? router : `/${router}`
+}
+
 export function shouldRun(repo: string, exclude: string[]) {
   return !exclude.some((item: string) =>
     new RegExp(`^${item.replace(/\*/g, '.*')}$`).test(repo),
