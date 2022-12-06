@@ -1,3 +1,10 @@
+## [1.3.7](https://github.com/bubkoo/bot/compare/v1.3.6...v1.3.7) (2022-12-06)
+
+
+### Bug Fixes
+
+* dispath events ([6a8e2c4](https://github.com/bubkoo/bot/commit/6a8e2c49f39cfca949c69b28d912a5133343a172))
+
 ## [1.3.6](https://github.com/bubkoo/bot/compare/v1.3.5...v1.3.6) (2022-12-06)
 
 
