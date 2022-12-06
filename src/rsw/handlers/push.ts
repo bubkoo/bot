@@ -1,11 +1,11 @@
 import path from 'path'
-import { Context } from 'probot'
+import { Probot, Context } from 'probot'
 import { IRun, Runs } from '../db-model'
 import { ROUTE_NAME } from '../constants'
 import { getConfig } from '../config'
 // import { shouldRun } from '../util'
 
-export async function push(context: Context<'push'>) {
+export async function push(context: Context<'push'>, app: Probot) {
   const repo = context.payload.repository
   const owner = repo.owner
   const config = await getConfig(context)
@@ -15,9 +15,11 @@ export async function push(context: Context<'push'>) {
 
   const sha = context.payload.after
   const webhook = await context.octokit.apps.getWebhookConfigForApp()
-  const token = await context.octokit.apps.createInstallationAccessToken({
-    installation_id: context.payload?.installation?.id || 0,
-    repository_ids: [repo.id],
+  const client = await app.auth()
+  const {
+    data: { token },
+  } = await client.apps.createInstallationAccessToken({
+    installation_id: context.payload.installation!.id,
   })
 
   const data: Partial<IRun> = {
@@ -46,8 +48,8 @@ export async function push(context: Context<'push'>) {
     event_type: config.eventType,
     client_payload: {
       ...data,
+      token,
       id: _id.toString(),
-      token: token.data.token,
       event: context.payload,
     },
   })

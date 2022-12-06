@@ -10,7 +10,7 @@ import { complete } from './handlers/completed'
 export default async (app: Probot, options: ApplicationFunctionOptions) => {
   try {
     const getDBStatus = await connectDB()
-    app.on('push', async (context) => push(context))
+    app.on('push', async (context) => push(context, app))
     app.on('check_run.rerequested', async (context) => rerun(context))
     app.on('workflow_run.completed', async (context) => complete(context))
 
