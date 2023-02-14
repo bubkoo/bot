@@ -12,7 +12,7 @@ inputs:
     description: The ID of workflow run (provided via GitHub syntax `github.run_id`)
     required: true
   name:
-    description: The name of check (Use `github.workflow` to use the name of the workflow)
+    description: The name of check (Default `github.workflow` of the workflow)
     required: true
   callback:
     description: The callback url for register call (provided by GitHub app via `github.event.client_payload.callback`)

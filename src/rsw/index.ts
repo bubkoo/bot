@@ -12,7 +12,6 @@ export default async (app: Probot, options: ApplicationFunctionOptions) => {
     const getDBStatus = await connectDB()
 
     const router = options.getRouter!(fixRouter(ROUTE_NAME))
-    router.get('/register', async (req, res) => register(req, res, app))
     router.get('/health', async (req, res) => {
       const { connection, state } = getDBStatus()
       const status = connection === 'up' && state === 'connected' ? 200 : 503
@@ -22,6 +21,8 @@ export default async (app: Probot, options: ApplicationFunctionOptions) => {
       })
     })
 
+    router.get('/register', async (req, res) => register(req, res, app))
+
     app.on('push', async (context) =>
       dispatchEvents(app, context, {
         sha: context.payload.after,
@@ -29,12 +30,12 @@ export default async (app: Probot, options: ApplicationFunctionOptions) => {
       }),
     )
 
-    app.on(['pull_request'], async (context) =>
-      dispatchEvents(app, context, {
-        sha: context.payload.pull_request.head.sha!,
-        ref: context.payload.pull_request.head.ref,
-      }),
-    )
+    // app.on(['pull_request'], async (context) =>
+    //   dispatchEvents(app, context, {
+    //     sha: context.payload.pull_request.head.sha!,
+    //     ref: context.payload.pull_request.head.ref,
+    //   }),
+    // )
 
     app.on('check_run.rerequested', async (context) => rerun(context))
     app.on('workflow_run.completed', async (context) => complete(context))
