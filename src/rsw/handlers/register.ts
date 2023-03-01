@@ -26,7 +26,7 @@ export async function register(req: any, res: any, app: Probot): Promise<any> {
 
   const octokit = await createOctokit(app, run.repo.owner)
 
-  const data: any = {
+  const check_data: any = {
     owner: run.repo.owner,
     repo: run.repo.name,
     head_sha: run.sha,
@@ -34,6 +34,9 @@ export async function register(req: any, res: any, app: Probot): Promise<any> {
     details_url: `https://github.com/${run.repo.owner}/${run.config.host_repo}/actions/runs/${run_id}`,
     status: 'in_progress',
   }
+
+  // eslint-disable-next-line no-console
+  console.log(run, doc_path)
 
   if (doc_path) {
     try {
@@ -47,28 +50,17 @@ export async function register(req: any, res: any, app: Probot): Promise<any> {
         (docs.data as any).content,
         (docs.data as any).encoding,
       ).toString()
-      data.output = { title: name, summary }
+      // eslint-disable-next-line no-console
+      console.log(summary)
+      check_data.output = { title: name, summary }
     } catch (e) {
       // pass
     }
   }
 
-  const { data: checks_run } = await octokit.checks.create(data)
-
-  // enforceProtection(
-  //   octokit,
-  //   {
-  //     owner: run.repo.owner,
-  //     repo: run.repo.name,
-  //   },
-  //   data.name,
-  //   enforce === 'true',
-  //   // Exclude the repository that contains the workflow.
-  //   enforce_admin === 'true' && run.repo.name !== run.config.host_repo,
-  // )
-
+  const { data: checks_run } = await octokit.checks.create(check_data)
   const checkInfo: ICheck = {
-    name: data.name,
+    name: check_data.name,
     run_id: Number(run_id),
     checks_run_id: checks_run.id,
   }

@@ -1,15 +1,15 @@
-import { Probot, ApplicationFunctionOptions } from 'probot'
-import token from '@wow-actions/app-token'
+import { Probot } from 'probot'
+// import token from '@wow-actions/app-token'
 import wip from './wip'
-import rsw from './rsw'
+// import rsw from './rsw'
 
-export = async (app: Probot, options: ApplicationFunctionOptions) => {
+export = async (app: Probot) => {
   app.onAny(async (context: any) => {
     // eslint-disable-next-line no-console
-    console.log(`event: ${context.name}`)
+    console.log(`\n>>>> event: ${context.name}`)
   })
 
-  token(app)
+  // token(app)
   wip(app)
-  rsw(app, options)
+  // rsw(app, options)
 }

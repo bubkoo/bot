@@ -1,5 +1,18 @@
 import { Context } from 'probot'
+import colors from 'ansi-colors'
 import minimatch from 'minimatch'
+
+export function log(msg: string): void
+export function log(scope: string, msg: string): void
+export function log(msg: string, scope?: string) {
+  const message = scope || msg
+  let prefix = colors.magenta('RSW')
+  if (scope) {
+    prefix += ` ${colors.dim(`[${msg}]`)}`
+  }
+  // eslint-disable-next-line no-console
+  console.log(`${prefix}: ${message}`)
+}
 
 export function fixRouter(router: string) {
   return router.startsWith('/') ? router : `/${router}`

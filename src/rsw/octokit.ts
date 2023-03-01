@@ -2,7 +2,7 @@ import path from 'path'
 import { Probot, Context } from 'probot'
 import { ROUTE_NAME } from './constants'
 import { IRun, Runs } from './db-model'
-import { shouldRun } from './util'
+import { log, shouldRun } from './util'
 import { getConfig } from './config'
 
 export function getDispatchEvents(context: Context, prefix: string) {
@@ -17,7 +17,13 @@ export function getDispatchEvents(context: Context, prefix: string) {
   return events
 }
 
-export async function getCallbackUrl(context: Context) {
+export async function getRegisterUrl(context: Context) {
+  const registerURI = process.env.RSW_REGISTER_URI
+  // eslint-disable-next-line no-console
+  console.log('RSW_REGISTER_URI:', registerURI)
+  if (registerURI) {
+    return registerURI
+  }
   const webhook = await context.octokit.apps.getWebhookConfigForApp()
   return path.join(webhook.data.url!, ROUTE_NAME, 'register')
 }
@@ -78,9 +84,9 @@ export async function dispatchEvents(
     return
   }
 
-  context.log.info(`config: ${JSON.stringify(config, null, 2)}`)
+  log('config', JSON.stringify(config, null, 2))
 
-  const callback = await getCallbackUrl(context)
+  const callback = await getRegisterUrl(context)
 
   const data: Partial<IRun> = {
     ...inputs,
