@@ -1,3 +1,10 @@
+# [1.4.0](https://github.com/bubkoo/bot/compare/v1.3.17...v1.4.0) (2023-03-01)
+
+
+### Features
+
+* disable rsw ([6f6c872](https://github.com/bubkoo/bot/commit/6f6c8724b451b5199cf6873c8963feb019aca863))
+
 ## [1.3.17](https://github.com/bubkoo/bot/compare/v1.3.16...v1.3.17) (2022-12-06)
 
 ## [1.3.16](https://github.com/bubkoo/bot/compare/v1.3.15...v1.3.16) (2022-12-06)
